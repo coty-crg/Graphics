@@ -264,6 +264,8 @@ namespace UnityEditor.Rendering.HighDefinition
         MaterialProperty opaqueCullMode = null;
         MaterialProperty rayTracing = null;
 
+        SerializedProperty renderQueueProperty = null;
+
         SurfaceType defaultSurfaceType { get { return SurfaceType.Opaque; } }
 
         // start faking MaterialProperty for renderQueue
@@ -419,6 +421,8 @@ namespace UnityEditor.Rendering.HighDefinition
             rayTracing = FindProperty(kRayTracing);
 
             refractionModel = FindProperty(kRefractionModel);
+
+            renderQueueProperty = materialEditor.serializedObject.FindProperty("m_CustomRenderQueue");
         }
 
         /// <summary>
@@ -687,6 +691,7 @@ namespace UnityEditor.Rendering.HighDefinition
                     EditorGUILayout.HelpBox(Styles.transparentSSSErrorMessage, MessageType.Error);
             }
 
+            MaterialEditor.BeginProperty(renderQueueProperty);
             switch (mode)
             {
                 case SurfaceType.Opaque:
@@ -722,6 +727,8 @@ namespace UnityEditor.Rendering.HighDefinition
                 default:
                     throw new ArgumentException("Unknown SurfaceType");
             }
+            MaterialEditor.EndProperty();
+
             --EditorGUI.indentLevel;
             EditorGUI.showMixedValue = false;
 
@@ -926,6 +933,7 @@ namespace UnityEditor.Rendering.HighDefinition
             int mode = (int)BaseLitGUI.GetFilteredDisplacementMode(prop);
             bool mixed = BaseLitGUI.HasMixedDisplacementMode(prop);
 
+            MaterialEditor.BeginProperty(prop);
             EditorGUI.BeginChangeCheck();
             EditorGUI.showMixedValue = mixed;
             int newMode = EditorGUILayout.IntPopup(label, mode, displayedOptions, optionValues);
@@ -935,6 +943,7 @@ namespace UnityEditor.Rendering.HighDefinition
                 materialEditor.RegisterPropertyChangeUndo(label.text);
                 prop.floatValue = newMode;
             }
+            MaterialEditor.EndProperty();
 
             return (DisplacementMode)newMode;
         }
