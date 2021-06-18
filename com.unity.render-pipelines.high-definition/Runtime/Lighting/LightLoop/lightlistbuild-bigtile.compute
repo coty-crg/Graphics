@@ -190,7 +190,7 @@ void SphericalIntersectionTests(uint threadID, int iNrCoarseLights, float2 scree
 
     for(int l=threadID; l<iNrCoarseLights; l+=NR_THREADS)
     {
-        const int boundIndex = GenerateLightCullDataIndex(lightsListLDS[l], g_iNrVisibLights, eyeIndex);
+        const int boundIndex = GenerateLightCullDataIndex(lightsListLDS[l], g_iNrVisibLights, g_iEyeDataOffset, eyeIndex);
         SFiniteLightBound lgtDat = g_data[boundIndex];
 
         if( !DoesSphereOverlapTile(V, halfTileSizeAtZDistOne, lgtDat.center.xyz, lgtDat.radius, g_isOrthographic!=0) )
@@ -247,7 +247,7 @@ void CullByExactEdgeTests(uint threadID, int iNrCoarseLights, uint2 viTilLL, uin
     for(int l=0; l<iNrCoarseLights; l++)
     {
         const uint idxCoarse = lightsListLDS[l];
-        const int bufIdxCoarse = GenerateLightCullDataIndex(idxCoarse, g_iNrVisibLights, eyeIndex);
+        const int bufIdxCoarse = GenerateLightCullDataIndex(idxCoarse, g_iNrVisibLights, g_iEyeDataOffset, eyeIndex);
 
         bool canEnter = idxCoarse<(uint) g_iNrVisibLights;
 

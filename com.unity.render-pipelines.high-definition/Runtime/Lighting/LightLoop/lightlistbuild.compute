@@ -279,7 +279,7 @@ void TileLightListGen(uint3 dispatchThreadId : SV_DispatchThreadID, uint threadI
     int nrLightsCombinedList = min(ldsNrLightsFinal,LIGHT_LIST_MAX_COARSE_ENTRIES);
     for(int i=t; i<nrLightsCombinedList; i+=NR_THREADS)
     {
-        const int lightBoundIndex = GenerateLightCullDataIndex(prunedList[i], g_iNrVisibLights, unity_StereoEyeIndex);
+        const int lightBoundIndex = GenerateLightCullDataIndex(prunedList[i], g_iNrVisibLights, g_iEyeDataOffset, unity_StereoEyeIndex);
 
         InterlockedAdd(ldsCategoryListCount[_LightVolumeData[lightBoundIndex].lightCategory], 1);
 #ifdef USE_FEATURE_FLAGS
@@ -372,7 +372,7 @@ int SphericalIntersectionTests(uint threadID, int iNrCoarseLights, float2 screen
 
     for(l=threadID; l<iNrCoarseLights; l+=NR_THREADS)
     {
-        const int lightBoundIndex = GenerateLightCullDataIndex(prunedList[l], g_iNrVisibLights, unity_StereoEyeIndex);
+        const int lightBoundIndex = GenerateLightCullDataIndex(prunedList[l], g_iNrVisibLights, g_iEyeDataOffset, unity_StereoEyeIndex);
         SFiniteLightBound lightData = g_data[lightBoundIndex];
 
         if( DoesSphereOverlapTile(V, halfTileSizeAtZDistOne, lightData.center.xyz, lightData.radius, g_isOrthographic!=0) )
@@ -395,7 +395,7 @@ int SphericalIntersectionTests(uint threadID, int iNrCoarseLights, float2 screen
 #ifdef FINE_PRUNING_ENABLED
 int GetCoarseLightIndex(int l, int iNrCoarseLights)
 {
-    return l < iNrCoarseLights ? GenerateLightCullDataIndex(coarseList[l], g_iNrVisibLights, unity_StereoEyeIndex) : 0;
+    return l < iNrCoarseLights ? GenerateLightCullDataIndex(coarseList[l], g_iNrVisibLights, g_iEyeDataOffset, unity_StereoEyeIndex) : 0;
 }
 
 // initializes ldsNrLightsFinal with the number of accepted lights.

@@ -3,13 +3,13 @@
 
 // Used to index into our SFiniteLightBound (g_data) and
 // LightVolumeData (_LightVolumeData) buffers.
-uint GenerateLightCullDataIndex(uint lightIndex, uint numVisibleLights, uint eyeIndex)
+uint GenerateLightCullDataIndex(uint lightIndex, uint numVisibleLights, uint eyeDataOffset, uint eyeIndex)
 {
     lightIndex = min(lightIndex, numVisibleLights - 1); // Stay within bounds
 
     // For monoscopic, there is just one set of light cull data structs.
     // In stereo, all of the left eye structs are first, followed by the right eye structs.
-    const uint perEyeBaseIndex = eyeIndex * numVisibleLights;
+    const uint perEyeBaseIndex = eyeIndex * eyeDataOffset;
     return (perEyeBaseIndex + lightIndex);
 }
 

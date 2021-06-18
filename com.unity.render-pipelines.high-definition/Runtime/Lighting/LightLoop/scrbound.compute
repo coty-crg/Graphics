@@ -549,7 +549,7 @@ void main(uint threadID : SV_GroupIndex, uint3 groupID : SV_GroupID)
     const uint globalLightIndex     = g * LIGHTS_PER_GROUP + intraGroupLightIndex;
     const uint baseVertexOffset     = intraGroupLightIndex * NUM_VERTS;
 
-    const uint eyeAdjustedInputOffset = GenerateLightCullDataIndex(globalLightIndex, g_iNrVisibLights, eyeIndex);
+    const uint eyeAdjustedInputOffset = GenerateLightCullDataIndex(globalLightIndex, g_iNrVisibLights, g_iEyeDataOffset, eyeIndex);
     const SFiniteLightBound  cullData = g_data[eyeAdjustedInputOffset];
 
     const float4x4 projMat    = g_mProjectionArr[eyeIndex];

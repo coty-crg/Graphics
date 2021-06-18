@@ -428,7 +428,7 @@ void LIGHTLISTGEN(uint threadID : SV_GroupIndex, uint3 u3GroupID : SV_GroupID)
         {
             if(offs<(start+iSpaceAvail) && i<nrClusters && CheckIntersection(l, i, viTilLL.xy, viTilUR.xy, suggestedBase, eyeIndex) )
             {
-                const int lightVolIndex = GenerateLightCullDataIndex(coarseList[l], g_iNrVisibLights, eyeIndex);
+                const int lightVolIndex = GenerateLightCullDataIndex(coarseList[l], g_iNrVisibLights, g_iEyeDataOffset, eyeIndex);
                 uint lightCategory = _LightVolumeData[lightVolIndex].lightCategory;
                 IncrementCategoryListCount(t, lightCategory);
                 g_vLayeredLightList[offs++] = coarseList[l] - ReadShiftIndex(t, lightCategory);
@@ -463,7 +463,7 @@ void LIGHTLISTGEN(uint threadID : SV_GroupIndex, uint3 u3GroupID : SV_GroupID)
 
 float4 FetchPlane(int l, int p, uint eyeIndex)
 {
-    const int lightBoundIndex = GenerateLightCullDataIndex(coarseList[l], g_iNrVisibLights, eyeIndex);
+    const int lightBoundIndex = GenerateLightCullDataIndex(coarseList[l], g_iNrVisibLights, g_iEyeDataOffset, eyeIndex);
     SFiniteLightBound lgtDat = g_data[lightBoundIndex];
 
     const float3 boxX = lgtDat.boxAxisX.xyz;
@@ -493,7 +493,7 @@ int SphericalIntersectionTests(uint threadID, int iNrCoarseLights, float2 screen
 
     for(int l=threadID; l<iNrCoarseLights; l+=NR_THREADS)
     {
-        const int lightBoundIndex = GenerateLightCullDataIndex(coarseList[l], g_iNrVisibLights, eyeIndex);
+        const int lightBoundIndex = GenerateLightCullDataIndex(coarseList[l], g_iNrVisibLights, g_iEyeDataOffset, eyeIndex);
         SFiniteLightBound lgtDat = g_data[lightBoundIndex];
 
         if( !DoesSphereOverlapTile(V, halfTileSizeAtZDistOne, lgtDat.center.xyz, lgtDat.radius, g_isOrthographic!=0) )
@@ -575,7 +575,7 @@ int CullByExactEdgeTests(uint threadID, int iNrCoarseLights, uint2 viTilLL, uint
 #if NR_THREADS > PLATFORM_LANE_COUNT
         GroupMemoryBarrierWithGroupSync();
 #endif
-        const int lightCullIndex = GenerateLightCullDataIndex(coarseList[l], g_iNrVisibLights, eyeIndex);
+        const int lightCullIndex = GenerateLightCullDataIndex(coarseList[l], g_iNrVisibLights, g_iEyeDataOffset, eyeIndex);
         UNITY_BRANCH if (_LightVolumeData[lightCullIndex].lightVolume != LIGHTVOLUMETYPE_SPHERE)        // don't bother doing edge tests for sphere lights since these have camera aligned bboxes.
         {
             SFiniteLightBound lgtDat = g_data[lightCullIndex];

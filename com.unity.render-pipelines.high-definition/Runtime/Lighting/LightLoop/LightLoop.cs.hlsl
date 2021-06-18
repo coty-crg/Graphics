@@ -111,9 +111,9 @@ CBUFFER_START(ShaderVariablesLightList)
     uint _EnvLightIndexShift;
     uint _DecalIndexShift;
     uint _LocalVolumetricFogIndexShift;
+    uint g_iEyeDataOffset;
     uint _Pad0_SVLL;
     uint _Pad1_SVLL;
-    uint _Pad2_SVLL;
 CBUFFER_END
 
 //
