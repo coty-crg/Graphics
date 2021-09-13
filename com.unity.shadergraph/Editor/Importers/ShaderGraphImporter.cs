@@ -201,6 +201,10 @@ Shader ""Hidden/GraphErrorShader2""
             ctx.AddObjectToAsset("MainAsset", mainObject, texture);
             ctx.SetMainObject(mainObject);
 
+            Material material = new Material(shader) { name = Path.GetFileNameWithoutExtension(path) };
+            //material.hideFlags = HideFlags.HideAndDontSave;
+            ctx.AddObjectToAsset("material", material);
+
             foreach (var target in graph.activeTargets)
             {
                 if (target is IHasMetadata iHasMetadata)
