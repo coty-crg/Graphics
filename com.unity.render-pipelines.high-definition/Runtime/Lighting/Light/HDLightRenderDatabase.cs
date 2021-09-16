@@ -90,7 +90,7 @@ namespace UnityEngine.Rendering.HighDefinition
         }
 
         //Gets a data reference from an entity. C# doesnt have a const modifier, however we keep this for convension, this ref shoulnd't be modified.
-        public ref HDLightRenderData GetLightDataAsRef (in HDLightRenderEntity entity) => ref EditLightDataAsRef(entity);
+        public ref HDLightRenderData GetLightDataAsRef(in HDLightRenderEntity entity) => ref EditLightDataAsRef(entity);
 
         //Gets and edits a reference. Must be not called during rendering pipeline, only during game object modification.
         public ref HDLightRenderData EditLightDataAsRef(in HDLightRenderEntity entity) => ref EditLightDataAsRef(m_LightEntities[entity.entityIndex].dataIndex);
