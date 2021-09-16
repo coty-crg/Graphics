@@ -428,7 +428,7 @@ namespace UnityEngine.Rendering.HighDefinition
                 if (additionalLightData == null)
                     continue;
 
-                //We utilize a ray light data pointer to avoid copying the entire structure
+                //We utilize a raw light data pointer to avoid copying the entire structure
                 HDProcessedVisibleLight* processedEntityPtr = processedLightArrayPtr + lightIndex;
                 ref HDProcessedVisibleLight processedEntity = ref UnsafeUtility.AsRef<HDProcessedVisibleLight>(processedEntityPtr);
                 HDLightType lightType = processedEntity.lightType;
