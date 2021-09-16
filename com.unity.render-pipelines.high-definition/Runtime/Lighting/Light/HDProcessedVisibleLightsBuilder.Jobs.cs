@@ -17,12 +17,12 @@ namespace UnityEngine.Rendering.HighDefinition
 #endif
         struct ProcessVisibleLightJob : IJobParallelFor
         {
-            #region Light entity SoA data
+            #region Light entity data
             [NativeDisableContainerSafetyRestriction]
             public NativeArray<HDLightRenderData> lightData;
             #endregion
 
-            #region Visible light SoA
+            #region Visible light data
             [ReadOnly]
             public NativeArray<VisibleLight> visibleLights;
             [ReadOnly]
@@ -344,7 +344,7 @@ namespace UnityEngine.Rendering.HighDefinition
                 //render light entities.
                 lightData = lightEntityCollection.lightData,
 
-                //SoA of all visible light entities.
+                //data of all visible light entities.
                 visibleLights = visibleLights,
                 visibleLightEntityDataIndices = m_VisibleLightEntityDataIndices,
                 visibleLightBakingOutput = m_VisibleLightBakingOutput,

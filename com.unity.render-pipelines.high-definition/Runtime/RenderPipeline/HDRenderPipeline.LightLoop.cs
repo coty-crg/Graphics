@@ -160,7 +160,7 @@ namespace UnityEngine.Rendering.HighDefinition
                 // Also, we clear all the lists and to be resilient to changes in pipeline.
                 if (data.runBigTilePrepass)
                     ClearLightList(data, cmd, data.output.bigTileLightList);
-                if (data.canClearLightList) // This can happen for probe volume light list build where we only generate clusters.
+                if (data.canClearLightList) // This can happen when we dont have a GPULight list builder and a light list instantiated.
                     ClearLightList(data, cmd, data.output.lightList);
                 ClearLightList(data, cmd, data.output.perVoxelOffset);
             }

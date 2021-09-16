@@ -17,6 +17,7 @@ namespace UnityEngine.Rendering.HighDefinition
     }
 
     //Data of the lights inside the database.
+    //TODO: as a next round of optimizations, this should be reorganized to be cache friendly, and possibly split into SoAs for that matter.
     internal struct HDLightRenderData
     {
         public HDAdditionalLightData.PointLightHDType pointLightType;
@@ -88,11 +89,17 @@ namespace UnityEngine.Rendering.HighDefinition
             }
         }
 
-        //Gets a data reference from an entity.
-        public ref HDLightRenderData GetLightData(in HDLightRenderEntity entity) => ref GetLightData(m_LightEntities[entity.entityIndex].dataIndex);
+        //Gets a data reference from an entity. C# doesnt have a const modifier, however we keep this for convension, this ref shoulnd't be modified.
+        public ref HDLightRenderData GetLightDataAsRef (in HDLightRenderEntity entity) => ref EditLightDataAsRef(entity);
 
-        //Gets integer data reference from an entity.
-        public ref HDLightRenderData GetLightData(int dataIndex)
+        //Gets and edits a reference. Must be not called during rendering pipeline, only during game object modification.
+        public ref HDLightRenderData EditLightDataAsRef(in HDLightRenderEntity entity) => ref EditLightDataAsRef(m_LightEntities[entity.entityIndex].dataIndex);
+
+        //Gets a data reference from an entity. C# doesnt have a const modifier, however we keep this for convension, this ref shoulnd't be modified.
+        public ref HDLightRenderData GetLightDataAsRef(int dataIndex) => ref EditLightDataAsRef(dataIndex);
+
+        //Gets and edits a reference. Must be not called during rendering pipeline, only during game object modification.
+        public ref HDLightRenderData EditLightDataAsRef(int dataIndex)
         {
             if (dataIndex >= m_LightCount)
                 throw new Exception("Entity passed in is out of bounds. Index requested " + dataIndex + " and maximum length is " + m_LightCount);

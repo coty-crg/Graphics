@@ -525,7 +525,7 @@ namespace UnityEngine.Rendering.HighDefinition
                 // Fetch the light component for this light
                 additionalLightData.gameObject.TryGetComponent(out lightComponent);
 
-                ref HDLightRenderData lightRenderData = ref lightEntities.GetLightData(dataIndex);
+                ref HDLightRenderData lightRenderData = ref lightEntities.GetLightDataAsRef(dataIndex);
 
                 // Build the processed light data  that we need
                 processedLightEntity.dataIndex = dataIndex;

@@ -78,7 +78,7 @@ namespace UnityEngine.Rendering.HighDefinition
             public float aerosolExtinctionCoefficient;
             #endregion
 
-            #region input light entity SoA data
+            #region input light entity data
             [NativeDisableContainerSafetyRestriction]
             public NativeArray<HDLightRenderData> lightRenderDataArray;
             #endregion
@@ -718,7 +718,7 @@ namespace UnityEngine.Rendering.HighDefinition
                 airExtinctionCoefficient = skySettings.GetAirExtinctionCoefficient(),
                 aerosolExtinctionCoefficient = skySettings.GetAerosolExtinctionCoefficient(),
 
-                // light entity SoA data
+                // light entity data
                 lightRenderDataArray = lightEntities.lightData,
 
                 //visible lights processed
