@@ -176,8 +176,8 @@ namespace UnityEngine.Rendering.HighDefinition
                     cloudModelData.densityMultiplier = 0.25f;
                     cloudModelData.shapeFactor = 0.9f;
                     cloudModelData.shapeScale = 3.0f;
-                    cloudModelData.erosionFactor = 0.9f;
-                    cloudModelData.erosionScale = 75.0f;
+                    cloudModelData.erosionFactor = 0.8f;
+                    cloudModelData.erosionScale = 70.0f;
                     cloudModelData.erosionNoise = VolumetricClouds.CloudErosionNoise.Perlin32;
                     return;
                 }
@@ -187,16 +187,16 @@ namespace UnityEngine.Rendering.HighDefinition
                     cloudModelData.shapeFactor = 0.9f;
                     cloudModelData.shapeScale = 5.0f;
                     cloudModelData.erosionFactor = 0.9f;
-                    cloudModelData.erosionScale = 120.0f;
+                    cloudModelData.erosionScale = 100.0f;
                     cloudModelData.erosionNoise = VolumetricClouds.CloudErosionNoise.Perlin32;
                     return;
                 }
                 case VolumetricClouds.CloudPresets.Overcast:
                 {
-                    cloudModelData.densityMultiplier = 0.25f;
-                    cloudModelData.shapeFactor = 0.55f;
-                    cloudModelData.shapeScale = 8.0f;
-                    cloudModelData.erosionFactor = 0.6f;
+                    cloudModelData.densityMultiplier = 0.3f;
+                    cloudModelData.shapeFactor = 0.625f;
+                    cloudModelData.shapeScale = 6.0f;
+                    cloudModelData.erosionFactor = 0.9f;
                     cloudModelData.erosionScale = 80.0f;
                     cloudModelData.erosionNoise = VolumetricClouds.CloudErosionNoise.Perlin32;
                     return;
@@ -206,8 +206,8 @@ namespace UnityEngine.Rendering.HighDefinition
                     cloudModelData.densityMultiplier = 0.3f;
                     cloudModelData.shapeFactor = 0.85f;
                     cloudModelData.shapeScale = 3.0f;
-                    cloudModelData.erosionFactor = 0.95f;
-                    cloudModelData.erosionScale = 60.0f;
+                    cloudModelData.erosionFactor = 0.9f;
+                    cloudModelData.erosionScale = 70.0f;
                     cloudModelData.erosionNoise = VolumetricClouds.CloudErosionNoise.Perlin32;
                     return;
                 }

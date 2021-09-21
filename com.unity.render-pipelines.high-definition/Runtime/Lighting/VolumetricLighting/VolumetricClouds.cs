@@ -243,14 +243,14 @@ namespace UnityEngine.Rendering.HighDefinition
         /// <summary>
         /// Controls the number of steps when evaluating the clouds' transmittance.
         /// </summary>
-        [Tooltip("Controls the number of steps when evaluating the clouds' transmittance.")]
-        public ClampedIntParameter numPrimarySteps = new ClampedIntParameter(48, 16, 512);
+        [Tooltip("Controls the number of steps when evaluating the clouds' transmittance. A higher value may lead to a lower noise level, and longer view distance, but at a higher cost.")]
+        public ClampedIntParameter numPrimarySteps = new ClampedIntParameter(48, 16, 2048);
 
         /// <summary>
         /// Controls the number of steps when evaluating the clouds' lighting.
         /// </summary>
-        [Tooltip("Controls the number of steps when evaluating the clouds' lighting.")]
-        public ClampedIntParameter numLightSteps = new ClampedIntParameter(8, 6, 32);
+        [Tooltip("Controls the number of steps when evaluating the clouds' lighting. A higher value will lead to smoother lighting, but at a higher cost.")]
+        public ClampedIntParameter numLightSteps = new ClampedIntParameter(6, 1, 32);
 
         /// <summary>
         /// Specifies the cloud map - Coverage (R), Rain (G), Type (B).
@@ -351,7 +351,7 @@ namespace UnityEngine.Rendering.HighDefinition
         /// <summary>
         /// Controls the amount of local scattering in the clouds. A value of 1 may provide a more powdery aspect.
         /// </summary>
-        [Tooltip("Controls the amount of local scattering in the clouds. A value of 1 may provide a more powdery aspect.")]
+        [Tooltip("Controls the amount of local back scattering in the clouds. A higher vlue may produce a more powdery or diffused aspect.")]
         [AdditionalProperty]
         public ClampedFloatParameter powderEffectIntensity = new ClampedFloatParameter(0.7f, 0.0f, 1.0f);
 
