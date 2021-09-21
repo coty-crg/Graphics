@@ -214,7 +214,7 @@ namespace UnityEngine.Rendering.HighDefinition
         /// Controls the altitude of the bottom of the volumetric clouds volume in meters.
         /// </summary>
         [Tooltip("Controls the altitude of the bottom of the volumetric clouds volume in meters.")]
-        public MinFloatParameter lowestCloudAltitude = new MinFloatParameter(1000, 0.01f);
+        public MinFloatParameter lowestCloudAltitude = new MinFloatParameter(1000.0f, 0.01f);
 
         /// <summary>
         /// Controls the thickness of the volumetric clouds volume in meters.
@@ -353,7 +353,7 @@ namespace UnityEngine.Rendering.HighDefinition
         /// </summary>
         [Tooltip("Controls the amount of local back scattering in the clouds. A higher vlue may produce a more powdery or diffused aspect.")]
         [AdditionalProperty]
-        public ClampedFloatParameter powderEffectIntensity = new ClampedFloatParameter(0.7f, 0.0f, 1.0f);
+        public ClampedFloatParameter powderEffectIntensity = new ClampedFloatParameter(0.25f, 0.0f, 1.0f);
 
         /// <summary>
         /// Controls the amount of multi-scattering inside the cloud.
