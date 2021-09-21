@@ -274,6 +274,14 @@ namespace UnityEngine.Rendering.Universal
             // Assign the camera color target early in case it is needed during AddRenderPasses.
             bool isPreviewCamera = cameraData.isPreviewCamera;
             var createColorTexture = rendererFeatures.Count != 0 && !isPreviewCamera;
+
+#if UNITY_ANDROID
+            if(cameraData.xr.enabled)
+            {
+                createColorTexture = false; 
+            }
+#endif
+
             if (createColorTexture)
             {
                 m_ActiveCameraColorAttachment = m_CameraColorAttachment;
